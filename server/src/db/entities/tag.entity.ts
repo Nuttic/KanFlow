@@ -9,10 +9,10 @@ export class Tag{
     @Column({length: 100})
         title: string
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
 
-    @OneToMany(() => Task_tag, task_tag => task_tag.tag_)
+    @OneToMany(() => Task_tag, task_tag => task_tag.tag_ ,)
     public task_tag : Task_tag
 }

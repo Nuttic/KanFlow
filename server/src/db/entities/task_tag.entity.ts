@@ -13,7 +13,7 @@ export class Task_tag{
     public tag_: Tag
 
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
 }

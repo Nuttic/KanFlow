@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne} from "typeorm";
+import { User } from "./user.entity";
+import { Team } from "./team.entity";
 
 
 export enum Type{
@@ -16,16 +18,19 @@ export class Collection{
         enum: Type,
         default: Type.BOARD})
     type: Type
+
     @Column({length: 100})
         title: string
     @Column({length: 400})
         description: string
-    @Column({default: null})
-        user_id: number
-    @Column({default: null})
-        team_id: number
+
+    @ManyToOne(() => Team, team => team.id, {nullable:true})
+        public team_ : Team
+    @ManyToOne(() => User, user => user.id, {nullable:true })
+        public user_ : User
+
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
 }

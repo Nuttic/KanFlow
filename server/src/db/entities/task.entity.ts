@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, OneToMany} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, OneToMany, ManyToOne} from "typeorm";
 import { Task_tag } from "./task_tag.entity";
-import { Tag } from "./tag.entity";
-import { table } from "console";
+import { Collection } from "./collection.entity";
+import { User } from "./user.entity";
 
 export enum Status{
     BACKLOG = 'Backlog',
@@ -10,7 +10,7 @@ export enum Status{
     REVIEW = 'In Review',
     DONE = 'Done'
 }
-export enum Difficult{ 
+export enum Difficult{
     HIGH = 'High',
     MEDIUM = 'Medium',
     EASY = 'Easy'
@@ -36,14 +36,16 @@ export class Task{
         default: Difficult.EASY
     })
     difficult_level: Difficult
-    @Column()
-        creator_id: number
-    @Column()
-        executer_id: number
-    @Column()
-        collection_id: number
+    @ManyToOne(() => User, user => user.id)
+        public creator_ : User
+    @ManyToOne(() => User, user => user.id)
+    public executer_ : User
+    @ManyToOne(() => Collection, collect => collect.id)
+    public collection_ : Collection
+
+
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
 

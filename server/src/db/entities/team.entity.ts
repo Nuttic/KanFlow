@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm";
+import { User_to_team_access } from "./user_to_team_access.entity";
 
 @Entity('team')
 export class Team{
@@ -7,7 +8,10 @@ export class Team{
     @Column({length: 30})
         team_name: string
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
+
+    @OneToMany(() => User_to_team_access, user_to_team => user_to_team.team_)
+    public user_to_team: User_to_team_access
 }

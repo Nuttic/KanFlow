@@ -1,18 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne} from "typeorm";
+import { User } from "./user.entity";
+import { Task } from "./task.entity";
 
 
 @Entity('comments')
 export class Comment{
     @PrimaryGeneratedColumn()
         id: number
-    @Column()
-        creator_id: number
+    @ManyToOne(() => User, creator => creator.id )
+        public creator_ : User
     @Column({length: 200})
         description: string
-    @Column()
-        task_id: number
+    @ManyToOne(() => Task, task_id => task_id.id)
+    public task_ : Task
     @CreateDateColumn()
-        reatedAt: Date;
+        createdAt: Date;
     @UpdateDateColumn()
         updatedAt: Date;
 }
