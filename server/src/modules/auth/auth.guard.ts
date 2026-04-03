@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import dotenv from 'dotenv';
 import { UsersService } from '../users/users.service';
-import { UserResponseDto } from 'src/modules/users/dto/responce-user.dto';
+import { UserResponseDto } from '../users/dto/response-user.dto';
 import { type User } from '../users/types/user';
 dotenv.config();
 

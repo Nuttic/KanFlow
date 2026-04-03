@@ -16,10 +16,10 @@ export class UsersService {
   async createUser(createUserDto: RegisterDto): Promise<User> {
     const { email, password } = createUserDto;
 
-    const existingUser = await this.usersRepository.findOne({ 
-      where: { email } 
+    const existingUser = await this.usersRepository.findOne({
+      where: { email }
     });
-    
+
     if (existingUser) {
       throw new ConflictException('Пользователь с таким email уже существует');
     }
@@ -39,26 +39,26 @@ export class UsersService {
   }
 
   async getUserById(id: string): Promise<User> {
-    const user = await this.usersRepository.findOne({ 
-      where: { id: +id } 
+    const user = await this.usersRepository.findOne({
+      where: { id: +id }
     });
-    
+
     if (!user) {
       throw new NotFoundException('Пользователь не найден');
     }
-    
+
     return user;
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOne({ 
-      where: { email } 
+    return this.usersRepository.findOne({
+      where: { email }
     });
   }
 
   async updateUser(id: string, updateData: Partial<User>): Promise<User> {
     const user = await this.getUserById(id);
-    
+
     if (updateData.password) {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }

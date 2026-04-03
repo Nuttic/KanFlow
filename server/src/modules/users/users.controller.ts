@@ -9,7 +9,7 @@ export class UsersController {
   @Post()
   async createUser(@Body() createUserDto: RegisterDto) {
     const user = await this.usersService.createUser(createUserDto);
-    
+
     const { password, ...result } = user;
     return result;
   }
