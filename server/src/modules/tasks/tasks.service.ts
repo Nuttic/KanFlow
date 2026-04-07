@@ -7,15 +7,6 @@ import { Repository } from 'typeorm';
 import { Status, Difficult, } from "../../db/entities/task.entity";
 
 
-// export interface TaskResponse {
-//   title: string
-//   description: string
-//   difficult_level: Difficult
-//   status: Status
-//   collection_: number
-//   creator_: number
-// }
-
 @Injectable()
 export class TasksService {
   constructor(
