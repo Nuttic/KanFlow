@@ -10,6 +10,9 @@ export class CollectionService {
         @InjectRepository(Collection)
         private collectionRepository: Repository<Collection>,
       ){}
+
+
+
  async createCollection(body: CreateCollectionDTO): Promise<Collection> {
   const newCollection = await this.collectionRepository.create({
     type: body.type,
@@ -31,9 +34,14 @@ export class CollectionService {
   //   return `This action returns a #${id} collection`;
   // }
 
-  // update(id: number, updateCollectionDto: UpdateCollectionDTO) {
-  //   return `This action updates a #${id} collection`;
-  // }
+  async updateCollection(id: number, body: UpdateCollectionDTO) {
+    const foundCollection = await this.collectionRepository.findOne({where: {id: id}})
+    if(!foundCollection){
+      throw new NotFoundException('такой коллекции нема, попробуй снова')
+    }
+    this.collectionRepository.merge(foundCollection, body)
+    return this.collectionRepository.save(foundCollection);
+  }
 
   async deleteCollection(id: number) {
     const foundCollection = await this.collectionRepository.findOne({where: {id: id}})
