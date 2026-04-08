@@ -23,10 +23,10 @@ export class CollectionController {
     return this.collectionService.findAllByUser(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id', ParseIntPipe) id: number, @Body() updateCollectionDto: UpdateCollectionDTO) {
-  //   return this.collectionService.update(id, updateCollectionDto);
-  // }
+  @Patch(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateCollectionDto: UpdateCollectionDTO) {
+    return this.collectionService.updateCollection(id, updateCollectionDto);
+  }
 
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
