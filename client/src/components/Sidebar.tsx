@@ -1,16 +1,21 @@
+import { User} from '@/store/AuthStore';
 import { ChevronLeft, LayoutDashboard, Users, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   isCollapsed: boolean;
   onToggle: () => void;
+  userData: User;
 }
 
-export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
+export function Sidebar({ isCollapsed, onToggle, userData }: SidebarProps) {
   const menuItems = [
     { icon: LayoutDashboard, label: 'All Boards', active: false },
     { icon: Users, label: 'Team', active: false },
     { icon: Settings, label: 'Settings', active: false },
   ];
+
+  const navigate = useNavigate()
 
   const activeBoard = 'Product Launch';
 
@@ -22,7 +27,9 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
     >
       {/* Profile Section */}
       <div className="p-6 border-b border-sidebar-border">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3"
+        onClick={()=> {navigate('/profile') }}
+        >
           <img
             src="https://images.unsplash.com/photo-1701096351544-7de3c7fa0272?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGhlYWRzaG90fGVufDF8fHx8MTc3MzcyNjcxNXww&ixlib=rb-4.1.0&q=80&w=1080"
             alt="Profile"
@@ -30,7 +37,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           />
           {!isCollapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm truncate text-sidebar-foreground">Sarah Chen</p>
+              <p className="text-sm truncate text-sidebar-foreground">{userData.name}</p>
               <p className="text-xs text-sidebar-foreground/60 truncate">Product Manager</p>
             </div>
           )}
