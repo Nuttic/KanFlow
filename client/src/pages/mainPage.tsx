@@ -2,31 +2,32 @@ import { useState, useEffect } from 'react';
 import { Sidebar } from '@/components/Sidebar';
 import { TopBar } from '@/components/TopBar';
 import { KanbanColumn } from '@/components/KanbanColumn';
-import { useTaskStore } from '@/store/TaskStore'; // исправил путь (taskStore с маленькой буквы)
-import { useBoardStore } from '@/store/BoardStore';
+// import { useTaskStore } from '@/store/TaskStore'; // исправил путь (taskStore с маленькой буквы)
+// import { useBoardStore } from '@/store/BoardStore';
+import {useAuthStore} from '@/store/AuthStore';
 
-export default function App() {
+export default function HomePage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  const { 
-    getTasksByStatus, 
-    fetchTasks, 
-    isLoading 
-  } = useTaskStore();
-  
-  const { currentBoard, fetchBoard } = useBoardStore();
+  // const { 
+  //   getTasksByStatus, 
+  //   fetchTasks, 
+  //   isLoading 
+  // } = useTaskStore();
+  const {user} = useAuthStore()
+  // const { currentBoard, fetchBoard } = useBoardStore();
 
   // ID доски (пока временно, потом можно из URL или выбора доски)
-  const boardId = 'your-board-id';
+  // const boardId = 'your-board-id';
 
-  useEffect(() => {
-    // Загружаем доску и задачи
-    if (boardId) {
-      fetchBoard(boardId);
-      fetchTasks(boardId);
-    }
-  }, [boardId, fetchBoard, fetchTasks]);
+  // useEffect(() => {
+  //   // Загружаем доску и задачи
+  //   if (boardId) {
+  //     fetchBoard(boardId);
+  //     // fetchTasks(boardId);
+  //   }
+  // }, [boardId, fetchBoard]);
 
   useEffect(() => {
     // Check system preference on mount
@@ -43,22 +44,23 @@ export default function App() {
   };
 
   // Получаем задачи по статусам
-  const todoTasks = getTasksByStatus(boardId, 'todo');
-  const inProgressTasks = getTasksByStatus(boardId, 'inProgress');
-  const inReviewTasks = getTasksByStatus(boardId, 'inReview');
-  const doneTasks = getTasksByStatus(boardId, 'done');
+  // const todoTasks = getTasksByStatus(boardId, 'todo');
+  // const inProgressTasks = getTasksByStatus(boardId, 'inProgress');
+  // const inReviewTasks = getTasksByStatus(boardId, 'inReview');
+  // const doneTasks = getTasksByStatus(boardId, 'done');
 
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-background">
-        <div className="text-foreground">Loading tasks...</div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex h-screen items-center justify-center bg-background">
+  //       <div className="text-foreground">Loading tasks...</div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar
+        userData={user!}
         isCollapsed={isSidebarCollapsed}
         onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
       />
@@ -69,28 +71,28 @@ export default function App() {
         <div className="flex-1 overflow-y-auto">
           <div className="p-6">
             <h1 className="mb-6 text-foreground">
-              {currentBoard?.title || 'Product Launch Tasks'}
+              {'Product Launch Tasks'}
             </h1>
             
             <div className="flex gap-4 overflow-x-auto pb-4">
               <KanbanColumn 
                 title="To Do" 
-                tasks={todoTasks} 
+                tasks={[]} 
                 color="gray" 
               />
               <KanbanColumn 
                 title="In Progress" 
-                tasks={inProgressTasks} 
+                tasks={[]} 
                 color="blue" 
               />
               <KanbanColumn 
                 title="In Review" 
-                tasks={inReviewTasks} 
+                tasks={[]} 
                 color="yellow" 
               />
               <KanbanColumn 
                 title="Done" 
-                tasks={doneTasks} 
+                tasks={[]} 
                 color="green" 
               />
             </div>
