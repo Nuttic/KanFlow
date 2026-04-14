@@ -12,6 +12,6 @@ export class Team{
     @UpdateDateColumn()
         updatedAt: Date;
 
-    @OneToMany(() => User_to_team_access, user_to_team => user_to_team.team_)
-    public user_to_team: User_to_team_access
+    @OneToMany(() => User_to_team_access, (uta) => uta.team_)
+    public user_to_team: User_to_team_access[];
 }

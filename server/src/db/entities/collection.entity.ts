@@ -25,9 +25,9 @@ export class Collection{
         description: string
 
     @ManyToOne(() => Team, team => team.id, {nullable:true})
-        public team_ : Team
+        public team_ : Team | null
     @ManyToOne(() => User, user => user.id, {nullable:true })
-        public user_ : User
+        public user_ : User | null
 
     @CreateDateColumn()
         createdAt: Date;

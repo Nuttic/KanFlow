@@ -13,10 +13,10 @@ import {
 import { AuthService } from './auth.service';
 import type { Response, Request } from 'express';
 import { CurrentUser } from './decorators/current-user.decorator';
-import type { User } from 'src/modules/users/types/user';
+import type { User } from '../users/types/user';
 import { AuthGuard } from './auth.guard';
 import { RegisterDto } from './dto/registr.dto';
-import { UserResponseDto } from 'src/modules/users/dto/responce-user.dto';
+import { UserResponseDto } from '../users/dto/response-user.dto';
 import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
