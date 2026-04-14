@@ -3,10 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm'; // Импортируем TypeO
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { User } from '../../db/entities/user.entity'; // Импортируем вашу сущность
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]), 
+    JwtModule
   ],
   providers: [UsersService],
   controllers: [UsersController],

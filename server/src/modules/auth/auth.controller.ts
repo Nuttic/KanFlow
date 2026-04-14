@@ -68,7 +68,7 @@ export class AuthController {
     @Req() req: Request,
   ) {
     const { email, password } = body;
-    console.log(req);
+    console.log(body);
 
     // console.log(username, email, password);
     if (!email && !password)
@@ -78,13 +78,16 @@ export class AuthController {
         email,
         password,
       });
+         console.log('registerData');
 
       this.authService.setTokensCookies(res, registerData.tokens);
       return res
         .status(HttpStatus.OK)
         .json(new UserResponseDto(registerData.user));
     } catch (error) {
-      return new NotFoundException('User not found');
+      console.log(error);
+      
+      return res.status(401).json({error});
     }
   }
 
