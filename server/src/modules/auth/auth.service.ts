@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { env } from 'process';
 import dotenv from 'dotenv';
 import * as bcrypt from 'bcrypt';
@@ -7,6 +7,7 @@ import { type User } from '../users/types/user';
 import { UsersService } from '../users/users.service';
 import { Response } from 'express';
 import { LoginParams, RegisterParams } from './types/auth-types';
+import { log } from 'console';
 
 
 type Tokens = {
@@ -54,9 +55,20 @@ export class AuthService {
   }: LoginParams): Promise<RegisterLoginResponse> {
     const user = await this.usersService.getUserByEmail(email)
 
+    console.log(user);
+    
+
     if (!user) throw new NotFoundException('User not found');
 
+    
+    const isPasswordMatching = await bcrypt.compare(
+      password,
+      user.password,  
+    );
 
+    if (!isPasswordMatching) {
+      throw new UnauthorizedException('Invalid password');
+    }
     const tokens = await this.genereateTokens(user.id.toString());
 
     return { tokens, user };
