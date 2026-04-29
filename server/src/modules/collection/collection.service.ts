@@ -18,6 +18,7 @@ export class CollectionService {
     type: body.type,
     title: body.title,
     description: body.description,
+    color: body.color,
     team_: body.team_ ? { id: body.team_ } : null,
     user_: body.user_ ? { id: body.user_ } : null,
   });

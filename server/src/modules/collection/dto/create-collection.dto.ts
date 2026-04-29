@@ -1,5 +1,5 @@
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
-import {Type} from '../../../db/entities/collection.entity'
+import {Type, Color} from '../../../db/entities/collection.entity'
 
 export class CreateCollectionDTO {
   @IsEnum(Type)
@@ -10,6 +10,9 @@ export class CreateCollectionDTO {
 
   @IsString()
   description: string; // Исправлена опечатка
+
+  @IsEnum(Color)
+  color: Color
 
   @IsOptional() // Позволяет полю быть null или отсутствовать
   @IsNumber()

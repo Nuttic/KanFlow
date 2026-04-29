@@ -9,6 +9,16 @@ export enum Type{
     TREE = 'Tree'
 }
 
+export enum Color{
+    BLUE = 'blue',
+    PURPLE = 'purple',
+    GREEN = 'green',
+    ORANGE = 'orange',
+    PINK = 'pink',
+    GRAY = 'gray'
+}
+
+
 @Entity('collections')
 export class Collection{
     @PrimaryGeneratedColumn()
@@ -23,6 +33,12 @@ export class Collection{
         title: string
     @Column({length: 400})
         description: string
+        
+    @Column({
+        type: 'enum',
+        enum: Color,
+        default: Color.BLUE})
+    color: Color
 
     @ManyToOne(() => Team, team => team.id, {nullable:true})
         public team_ : Team | null
