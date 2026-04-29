@@ -5,9 +5,13 @@ import LoginPage from '@/pages/auth/Login';
 import RegisterPage from '@/pages/auth/Registr';
 import HomePage from '@/pages/mainPage';
 import ProfilePage from '@/pages/ProfilePage';
+import AllBoardsPage from '@/pages/board/AllBoards';
+import BoardPage from '@/pages/board/BoardPage';
 
 const ProtectedRoute = () => {
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore((state) => state.currentUser);
+  console.log(user);
+  
   const isLoading = useAuthStore((state) => state.isLoading);
 
   // Пока checkAuth проверяет куки, показываем пустоту или спиннер
@@ -45,6 +49,10 @@ export const router = createBrowserRouter([
             path: ROUTES.HOME,
             element: <HomePage />,
           },
+           {
+            path: ROUTES.ALL_BOARDS,
+            element: <AllBoardsPage />,
+          },
           {
             path: ROUTES.PROFILE,
             element: <ProfilePage />,
@@ -52,6 +60,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.DEFAULT, // Например, '*'
             element: <HomePage />,
+          },
+          {
+            path: ROUTES.BOARD_DETAILS, 
+            element: <BoardPage />,
           },
         ],
       },

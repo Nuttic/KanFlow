@@ -18,7 +18,7 @@ export interface User {
 }
 
 interface AuthState {
-  user: User | null;
+  currentUser: User | null;
   isAuth: boolean;
   isLoading: boolean;
   error: string | null;
@@ -30,10 +30,10 @@ interface AuthState {
   checkAuth: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
+export const useAuthStore = create<AuthState>((set, get) => ({
+  currentUser: null,
   isAuth: false,
-  isLoading: false,
+  isLoading: true,
   error: null,
   usersCache: {},
 
@@ -53,7 +53,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
 
     if (data) {
-      set({ user: data as User, isAuth: true, isLoading: false });
+      set({ currentUser: data as User, isAuth: true, isLoading: false });
     }
   },
 
@@ -69,7 +69,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
 
     if (data) {
-      set({ user: data as User, isAuth: true, isLoading: false });
+      set({ currentUser: data as User, isAuth: true, isLoading: false });
     }
   },
 
@@ -77,8 +77,12 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true });
     try {
       const { data, error } = await authControllerGetMe();
+      console.log(data);
+      
       if (data && !error) {
-        set({ user: data as User, isAuth: true, isLoading: false });
+        set({ currentUser: {...data as User}, isAuth: true, isLoading: false });
+        console.log(get().currentUser);
+        
       } else {
         set({ isAuth: false, isLoading: false });
       }
@@ -89,6 +93,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   logOut: async () => {
     await authControllerLogout();
-    set({ user: null, isAuth: false });
+    set({ currentUser: null, isAuth: false });
   },
 }));

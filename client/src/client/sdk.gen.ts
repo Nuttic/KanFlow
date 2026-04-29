@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { AuthControllerGetMeData, AuthControllerGetMeResponses, AuthControllerLoginData, AuthControllerLoginResponses, AuthControllerLogoutData, AuthControllerLogoutResponses, AuthControllerRefreshData, AuthControllerRefreshResponses, AuthControllerRegisterData, AuthControllerRegisterResponses, UsersControllerCreateUserData, UsersControllerCreateUserResponses, UsersControllerGetAllUsersData, UsersControllerGetAllUsersResponses, UsersControllerGetUserByIdData, UsersControllerGetUserByIdResponses, UsersControllerRemoveUserData, UsersControllerRemoveUserResponses, UsersControllerUpdateUserData, UsersControllerUpdateUserResponses } from './types.gen';
+import type { AccessControllerCreateData, AccessControllerCreateResponses, AccessControllerFindAllData, AccessControllerFindAllResponses, AccessControllerFindOneData, AccessControllerFindOneResponses, AccessControllerRemoveData, AccessControllerRemoveResponses, AccessControllerUpdateData, AccessControllerUpdateResponses, AuthControllerGetMeData, AuthControllerGetMeResponses, AuthControllerLoginData, AuthControllerLoginResponses, AuthControllerLogoutData, AuthControllerLogoutResponses, AuthControllerRefreshData, AuthControllerRefreshResponses, AuthControllerRegisterData, AuthControllerRegisterResponses, CollectionControllerCreateData, CollectionControllerCreateResponses, CollectionControllerFindOneData, CollectionControllerFindOneResponses, CollectionControllerRemoveData, CollectionControllerRemoveResponses, CollectionControllerUpdateData, CollectionControllerUpdateResponses, CommentControllerCreateData, CommentControllerCreateResponses, CommentControllerFindByTaskIdData, CommentControllerFindByTaskIdResponses, CommentControllerRemoveData, CommentControllerRemoveResponses, CommentControllerUpdateCommentData, CommentControllerUpdateCommentResponses, TasksControllerCreateData, TasksControllerCreateResponses, TasksControllerDeleteTaskData, TasksControllerDeleteTaskResponses, TasksControllerGetAllTasksFromCollectionData, TasksControllerGetAllTasksFromCollectionResponses, TasksControllerUpdateTaskData, TasksControllerUpdateTaskResponses, TeamControllerCreateData, TeamControllerCreateResponses, TeamControllerFindAllData, TeamControllerFindAllResponses, TeamControllerFindOneData, TeamControllerFindOneResponses, TeamControllerRemoveData, TeamControllerRemoveResponses, TeamControllerUpdateData, TeamControllerUpdateResponses, UsersControllerCreateUserData, UsersControllerCreateUserResponses, UsersControllerGetAllUsersData, UsersControllerGetAllUsersResponses, UsersControllerGetUserByIdData, UsersControllerGetUserByIdResponses, UsersControllerRemoveUserData, UsersControllerRemoveUserResponses, UsersControllerUpdateUserData, UsersControllerUpdateUserResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -58,3 +58,117 @@ export const usersControllerRemoveUser = <ThrowOnError extends boolean = false>(
 export const usersControllerGetUserById = <ThrowOnError extends boolean = false>(options: Options<UsersControllerGetUserByIdData, ThrowOnError>) => (options.client ?? client).get<UsersControllerGetUserByIdResponses, unknown, ThrowOnError>({ url: '/api/users/{id}', ...options });
 
 export const usersControllerUpdateUser = <ThrowOnError extends boolean = false>(options: Options<UsersControllerUpdateUserData, ThrowOnError>) => (options.client ?? client).patch<UsersControllerUpdateUserResponses, unknown, ThrowOnError>({ url: '/api/users/{id}', ...options });
+
+export const tasksControllerCreate = <ThrowOnError extends boolean = false>(options: Options<TasksControllerCreateData, ThrowOnError>) => (options.client ?? client).post<TasksControllerCreateResponses, unknown, ThrowOnError>({
+    url: '/api/tasks/createTask',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const tasksControllerGetAllTasksFromCollection = <ThrowOnError extends boolean = false>(options: Options<TasksControllerGetAllTasksFromCollectionData, ThrowOnError>) => (options.client ?? client).get<TasksControllerGetAllTasksFromCollectionResponses, unknown, ThrowOnError>({ url: '/api/tasks/{collection_id}', ...options });
+
+export const tasksControllerDeleteTask = <ThrowOnError extends boolean = false>(options: Options<TasksControllerDeleteTaskData, ThrowOnError>) => (options.client ?? client).delete<TasksControllerDeleteTaskResponses, unknown, ThrowOnError>({ url: '/api/tasks/{id}', ...options });
+
+export const tasksControllerUpdateTask = <ThrowOnError extends boolean = false>(options: Options<TasksControllerUpdateTaskData, ThrowOnError>) => (options.client ?? client).patch<TasksControllerUpdateTaskResponses, unknown, ThrowOnError>({
+    url: '/api/tasks/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const collectionControllerCreate = <ThrowOnError extends boolean = false>(options: Options<CollectionControllerCreateData, ThrowOnError>) => (options.client ?? client).post<CollectionControllerCreateResponses, unknown, ThrowOnError>({
+    url: '/api/collection',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const collectionControllerRemove = <ThrowOnError extends boolean = false>(options: Options<CollectionControllerRemoveData, ThrowOnError>) => (options.client ?? client).delete<CollectionControllerRemoveResponses, unknown, ThrowOnError>({ url: '/api/collection/{id}', ...options });
+
+export const collectionControllerFindOne = <ThrowOnError extends boolean = false>(options: Options<CollectionControllerFindOneData, ThrowOnError>) => (options.client ?? client).get<CollectionControllerFindOneResponses, unknown, ThrowOnError>({ url: '/api/collection/{id}', ...options });
+
+export const collectionControllerUpdate = <ThrowOnError extends boolean = false>(options: Options<CollectionControllerUpdateData, ThrowOnError>) => (options.client ?? client).patch<CollectionControllerUpdateResponses, unknown, ThrowOnError>({
+    url: '/api/collection/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const commentControllerCreate = <ThrowOnError extends boolean = false>(options: Options<CommentControllerCreateData, ThrowOnError>) => (options.client ?? client).post<CommentControllerCreateResponses, unknown, ThrowOnError>({
+    url: '/api/comment',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const commentControllerFindByTaskId = <ThrowOnError extends boolean = false>(options: Options<CommentControllerFindByTaskIdData, ThrowOnError>) => (options.client ?? client).get<CommentControllerFindByTaskIdResponses, unknown, ThrowOnError>({ url: '/api/comment/{task_id}', ...options });
+
+export const commentControllerRemove = <ThrowOnError extends boolean = false>(options: Options<CommentControllerRemoveData, ThrowOnError>) => (options.client ?? client).delete<CommentControllerRemoveResponses, unknown, ThrowOnError>({ url: '/api/comment/{id}', ...options });
+
+export const commentControllerUpdateComment = <ThrowOnError extends boolean = false>(options: Options<CommentControllerUpdateCommentData, ThrowOnError>) => (options.client ?? client).patch<CommentControllerUpdateCommentResponses, unknown, ThrowOnError>({
+    url: '/api/comment/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const teamControllerFindAll = <ThrowOnError extends boolean = false>(options?: Options<TeamControllerFindAllData, ThrowOnError>) => (options?.client ?? client).get<TeamControllerFindAllResponses, unknown, ThrowOnError>({ url: '/api/teams', ...options });
+
+export const teamControllerCreate = <ThrowOnError extends boolean = false>(options: Options<TeamControllerCreateData, ThrowOnError>) => (options.client ?? client).post<TeamControllerCreateResponses, unknown, ThrowOnError>({
+    url: '/api/teams',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const teamControllerRemove = <ThrowOnError extends boolean = false>(options: Options<TeamControllerRemoveData, ThrowOnError>) => (options.client ?? client).delete<TeamControllerRemoveResponses, unknown, ThrowOnError>({ url: '/api/teams/{id}', ...options });
+
+export const teamControllerFindOne = <ThrowOnError extends boolean = false>(options: Options<TeamControllerFindOneData, ThrowOnError>) => (options.client ?? client).get<TeamControllerFindOneResponses, unknown, ThrowOnError>({ url: '/api/teams/{id}', ...options });
+
+export const teamControllerUpdate = <ThrowOnError extends boolean = false>(options: Options<TeamControllerUpdateData, ThrowOnError>) => (options.client ?? client).patch<TeamControllerUpdateResponses, unknown, ThrowOnError>({
+    url: '/api/teams/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const accessControllerFindAll = <ThrowOnError extends boolean = false>(options?: Options<AccessControllerFindAllData, ThrowOnError>) => (options?.client ?? client).get<AccessControllerFindAllResponses, unknown, ThrowOnError>({ url: '/api/team-access', ...options });
+
+export const accessControllerCreate = <ThrowOnError extends boolean = false>(options: Options<AccessControllerCreateData, ThrowOnError>) => (options.client ?? client).post<AccessControllerCreateResponses, unknown, ThrowOnError>({
+    url: '/api/team-access',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+export const accessControllerRemove = <ThrowOnError extends boolean = false>(options: Options<AccessControllerRemoveData, ThrowOnError>) => (options.client ?? client).delete<AccessControllerRemoveResponses, unknown, ThrowOnError>({ url: '/api/team-access/{id}', ...options });
+
+export const accessControllerFindOne = <ThrowOnError extends boolean = false>(options: Options<AccessControllerFindOneData, ThrowOnError>) => (options.client ?? client).get<AccessControllerFindOneResponses, unknown, ThrowOnError>({ url: '/api/team-access/{id}', ...options });
+
+export const accessControllerUpdate = <ThrowOnError extends boolean = false>(options: Options<AccessControllerUpdateData, ThrowOnError>) => (options.client ?? client).patch<AccessControllerUpdateResponses, unknown, ThrowOnError>({
+    url: '/api/team-access/{id}',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
