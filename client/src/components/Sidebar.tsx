@@ -1,5 +1,6 @@
 import { User} from '@/store/AuthStore';
-import { ChevronLeft, LayoutDashboard, Users, Settings } from 'lucide-react';
+import { useCollectionStore } from '@/store/BoardStore';
+import { ChevronLeft, LayoutDashboard, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
@@ -10,14 +11,15 @@ interface SidebarProps {
 
 export function Sidebar({ isCollapsed, onToggle, userData }: SidebarProps) {
   const menuItems = [
-    { icon: LayoutDashboard, label: 'All Boards', active: false },
-    { icon: Users, label: 'Team', active: false },
-    { icon: Settings, label: 'Settings', active: false },
+    { icon: LayoutDashboard, label: 'All Boards', active: false, addres:'/all_boards' },
+    // { icon: Users, label: 'Team', active: false, addres:'/' },
+    { icon: Settings, label: 'Settings', active: false, addres:'/'},
   ];
 
+  const {currentBoard} = useCollectionStore()
   const navigate = useNavigate()
 
-  const activeBoard = 'Product Launch';
+
 
   return (
     <aside
@@ -51,6 +53,7 @@ export function Sidebar({ isCollapsed, onToggle, userData }: SidebarProps) {
           return (
             <button
               key={item.label}
+              onClick={() => {navigate(item.addres)}}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                 item.active
                   ? 'bg-sidebar-accent text-sidebar-accent-foreground'
@@ -70,7 +73,7 @@ export function Sidebar({ isCollapsed, onToggle, userData }: SidebarProps) {
               Active Board
             </p>
             <div className="px-3 py-2.5 rounded-lg bg-sidebar-accent border-l-2 border-sidebar-primary">
-              <p className="text-sm text-sidebar-foreground">{activeBoard}</p>
+              <p className="text-sm text-sidebar-foreground">{currentBoard?.title}</p>
             </div>
           </div>
         )}

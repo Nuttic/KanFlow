@@ -1,36 +1,37 @@
 import { useState, useEffect } from 'react';
 import { Sidebar } from '@/components/Sidebar';
 import { TopBar } from '@/components/TopBar';
-import { KanbanColumn } from '@/components/KanbanColumn';
-import { Plus } from 'lucide-react';
 import {useAuthStore} from '@/store/AuthStore';
 import { Modal } from '@/components/shared/Modal';
 import { AddBoardForm } from '@/components/AddBoardForm';
 import { AddTaskForm } from '@/components/AddTAskForm';
-export default function HomePage() {
+import { useCollectionStore } from '@/store/BoardStore';
+import Board from '@/components/board/Board';
+import loadingGif from '@/assets/media/g0R9.gif'
+export default function BoardPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [isAddBoardModalOpen, setIsAddBoardModalOpen] = useState(false);
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
+
+  const actions = {
+    isAddBoardModalOpen,
+    setIsAddBoardModalOpen,
+    isAddTaskModalOpen,
+    setIsAddTaskModalOpen
+  }
 
   // const { 
   //   getTasksByStatus, 
   //   fetchTasks, 
   //   isLoading 
   // } = useTaskStore();
+  const {currentBoard, isLoading} = useCollectionStore()
   const {currentUser: user} = useAuthStore()
   // const { currentBoard, fetchBoard } = useBoardStore();
 
   // ID доски (пока временно, потом можно из URL или выбора доски)
   // const boardId = 'your-board-id';
-
-  // useEffect(() => {
-  //   // Загружаем доску и задачи
-  //   if (boardId) {
-  //     fetchBoard(boardId);
-  //     // fetchTasks(boardId);
-  //   }
-  // }, [boardId, fetchBoard]);
 
   useEffect(() => {
     // Check system preference on mount
@@ -70,52 +71,20 @@ export default function HomePage() {
       
       <main className="flex-1 flex flex-col overflow-hidden">
         <TopBar isDark={isDark} onThemeToggle={toggleTheme} entity='task'/>
-        
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-6">
-            <h1 className="mb-6 text-foreground">
-              {'Product Launch Tasks'}
-            </h1>
-            <div className="flex gap-3">
-                <button
-                  onClick={() => setIsAddBoardModalOpen(true)}
-                  className="px-4 py-2 bg-muted/50 text-foreground rounded-lg hover:bg-muted transition-colors flex items-center gap-2 text-sm"
-                >
-                  <Plus className="w-4 h-4" />
-                  New Board
-                </button>
-                <button
-                  onClick={() => setIsAddTaskModalOpen(true)}
-                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 text-sm"
-                >
-                  <Plus className="w-4 h-4" />
-                  New Task
-                </button>
-              </div>
-            <div className="flex gap-4 overflow-x-auto pb-4">
-              <KanbanColumn 
-                title="To Do" 
-                tasks={[]} 
-                color="gray" 
-              />
-              <KanbanColumn 
-                title="In Progress" 
-                tasks={[]} 
-                color="blue" 
-              />
-              <KanbanColumn 
-                title="In Review" 
-                tasks={[]} 
-                color="yellow" 
-              />
-              <KanbanColumn 
-                title="Done" 
-                tasks={[]} 
-                color="green" 
-              />
-            </div>
-          </div>
-        </div>
+        {isLoading 
+            ? 
+            <div className='flex-1 overflow-y-auto bg-000'
+            style={{backgroundColor: '#000'}}>
+               
+                <div style={{ display: 'flex', flexDirection: 'column',justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+               
+                <img src={loadingGif} alt="Загрузка..." width="180" />
+                <h1>Loading....</h1>
+                </div>
+            </div> 
+            :  
+            <Board board={currentBoard!} actions={actions}/>}
+       
       </main>
        <Modal
         isOpen={isAddBoardModalOpen}

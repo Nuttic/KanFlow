@@ -15,6 +15,46 @@ export type LoginDto = {
     password: string;
 };
 
+export type CreateTaskDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateTaskDto = {
+    [key: string]: unknown;
+};
+
+export type CreateCollectionDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateCollectionDto = {
+    [key: string]: unknown;
+};
+
+export type CreateCommentDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateCommentDto = {
+    [key: string]: unknown;
+};
+
+export type CreateTeamDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateTeamDto = {
+    [key: string]: unknown;
+};
+
+export type CreateAccessDto = {
+    [key: string]: unknown;
+};
+
+export type UpdateAccessDto = {
+    [key: string]: unknown;
+};
+
 export type AuthControllerGetMeData = {
     body?: never;
     path?: never;
@@ -130,5 +170,277 @@ export type UsersControllerUpdateUserData = {
 };
 
 export type UsersControllerUpdateUserResponses = {
+    200: unknown;
+};
+
+export type TasksControllerCreateData = {
+    body: CreateTaskDto;
+    path?: never;
+    query?: never;
+    url: '/api/tasks/createTask';
+};
+
+export type TasksControllerCreateResponses = {
+    201: unknown;
+};
+
+export type TasksControllerGetAllTasksFromCollectionData = {
+    body?: never;
+    path: {
+        collection_id: number;
+    };
+    query?: never;
+    url: '/api/tasks/{collection_id}';
+};
+
+export type TasksControllerGetAllTasksFromCollectionResponses = {
+    200: unknown;
+};
+
+export type TasksControllerDeleteTaskData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/tasks/{id}';
+};
+
+export type TasksControllerDeleteTaskResponses = {
+    200: unknown;
+};
+
+export type TasksControllerUpdateTaskData = {
+    body: UpdateTaskDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/tasks/{id}';
+};
+
+export type TasksControllerUpdateTaskResponses = {
+    200: unknown;
+};
+
+export type CollectionControllerCreateData = {
+    body: CreateCollectionDto;
+    path?: never;
+    query?: never;
+    url: '/api/collection';
+};
+
+export type CollectionControllerCreateResponses = {
+    201: unknown;
+};
+
+export type CollectionControllerRemoveData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/collection/{id}';
+};
+
+export type CollectionControllerRemoveResponses = {
+    200: unknown;
+};
+
+export type CollectionControllerFindOneData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/collection/{id}';
+};
+
+export type CollectionControllerFindOneResponses = {
+    200: unknown;
+};
+
+export type CollectionControllerUpdateData = {
+    body: UpdateCollectionDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/collection/{id}';
+};
+
+export type CollectionControllerUpdateResponses = {
+    200: unknown;
+};
+
+export type CommentControllerCreateData = {
+    body: CreateCommentDto;
+    path?: never;
+    query?: never;
+    url: '/api/comment';
+};
+
+export type CommentControllerCreateResponses = {
+    201: unknown;
+};
+
+export type CommentControllerFindByTaskIdData = {
+    body?: never;
+    path: {
+        task_id: number;
+    };
+    query?: never;
+    url: '/api/comment/{task_id}';
+};
+
+export type CommentControllerFindByTaskIdResponses = {
+    200: unknown;
+};
+
+export type CommentControllerRemoveData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/comment/{id}';
+};
+
+export type CommentControllerRemoveResponses = {
+    200: unknown;
+};
+
+export type CommentControllerUpdateCommentData = {
+    body: UpdateCommentDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/comment/{id}';
+};
+
+export type CommentControllerUpdateCommentResponses = {
+    200: unknown;
+};
+
+export type TeamControllerFindAllData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/teams';
+};
+
+export type TeamControllerFindAllResponses = {
+    200: unknown;
+};
+
+export type TeamControllerCreateData = {
+    body: CreateTeamDto;
+    path?: never;
+    query?: never;
+    url: '/api/teams';
+};
+
+export type TeamControllerCreateResponses = {
+    201: unknown;
+};
+
+export type TeamControllerRemoveData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/teams/{id}';
+};
+
+export type TeamControllerRemoveResponses = {
+    200: unknown;
+};
+
+export type TeamControllerFindOneData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/teams/{id}';
+};
+
+export type TeamControllerFindOneResponses = {
+    200: unknown;
+};
+
+export type TeamControllerUpdateData = {
+    body: UpdateTeamDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/teams/{id}';
+};
+
+export type TeamControllerUpdateResponses = {
+    200: unknown;
+};
+
+export type AccessControllerFindAllData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/team-access';
+};
+
+export type AccessControllerFindAllResponses = {
+    200: unknown;
+};
+
+export type AccessControllerCreateData = {
+    body: CreateAccessDto;
+    path?: never;
+    query?: never;
+    url: '/api/team-access';
+};
+
+export type AccessControllerCreateResponses = {
+    201: unknown;
+};
+
+export type AccessControllerRemoveData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/team-access/{id}';
+};
+
+export type AccessControllerRemoveResponses = {
+    200: unknown;
+};
+
+export type AccessControllerFindOneData = {
+    body?: never;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/team-access/{id}';
+};
+
+export type AccessControllerFindOneResponses = {
+    200: unknown;
+};
+
+export type AccessControllerUpdateData = {
+    body: UpdateAccessDto;
+    path: {
+        id: number;
+    };
+    query?: never;
+    url: '/api/team-access/{id}';
+};
+
+export type AccessControllerUpdateResponses = {
     200: unknown;
 };
