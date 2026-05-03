@@ -10,7 +10,7 @@ export class CommentController {
 
   @Post()
   async create(@Body() body: CreateCommentDto): Promise<Comment>{
-    return this.commentService.createComment(body);
+    return this.commentService.createComment(body)
   }
 
   // @Get()
@@ -20,16 +20,16 @@ export class CommentController {
 
   @Get(':task_id')
   async findByTaskId(@Param('task_id', ParseIntPipe) task_id: number): Promise<Comment[]> {
-    return this.commentService.findAllByTask(task_id);
+    return this.commentService.findAllByTask(task_id)
   }
 
   @Patch(':id')
   async updateComment(@Param('id', ParseIntPipe) id: number, @Body() new_body: UpdateCommentDto): Promise<Comment> {
-    return this.commentService.updateComment(id, new_body);
+    return this.commentService.updateComment(id, new_body)
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.commentService.deleteComment(id);
+    return this.commentService.deleteComment(id)
   }
 }

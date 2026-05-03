@@ -20,16 +20,16 @@ export class CollectionController {
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.collectionService.findAllByUser(id);
+    return this.collectionService.findAllByUser(id)
   }
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateCollectionDto: UpdateCollectionDTO) {
-    return this.collectionService.updateCollection(id, updateCollectionDto);
+    return this.collectionService.updateCollection(id, updateCollectionDto)
   }
 
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
-    return this.collectionService.deleteCollection(id);
+    return this.collectionService.deleteCollection(id)
   }
 }

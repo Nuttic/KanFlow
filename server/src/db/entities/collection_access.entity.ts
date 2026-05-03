@@ -1,22 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm";
 import { User } from "./user.entity";
 import { Team } from "./team.entity";
 
+import { AccessCollection } from "../interface/collection-access";
+import { Collection } from "./collection.entity";
+
 @Entity('collection_access')
-export class Collection_access{
+export class Collection_access {
     @PrimaryGeneratedColumn()
-        id: number
+    id: number
+
     @ManyToOne(() => User, user => user.id)
-        public user_ : User
+    @JoinColumn({ name: 'user_id' })
+    public user_: User | null
 
     @ManyToOne(() => Team, team => team.id)
-        public team_ : Team
-    @Column()
-        collection_id: number
+    @JoinColumn({ name: 'team_id' })
+    public team_: Team | null
+
+    @ManyToOne(() => Collection)
+    @JoinColumn({ name: 'collection_id' })
+    public collection_: Collection
+
     @Column('json')
-        access: any
+    access: AccessCollection
+
     @CreateDateColumn()
-        createdAt: Date;
+    createdAt: Date
     @UpdateDateColumn()
-        updatedAt: Date;
+    updatedAt: Date
 }

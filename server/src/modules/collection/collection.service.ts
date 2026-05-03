@@ -21,7 +21,7 @@ export class CollectionService {
     color: body.color,
     team_: body.team_ ? { id: body.team_ } : null,
     user_: body.user_ ? { id: body.user_ } : null,
-  });
+  })
 
   return this.collectionRepository.save(newCollection);
 }
@@ -41,7 +41,7 @@ export class CollectionService {
       throw new NotFoundException('такой коллекции нема, попробуй снова')
     }
     this.collectionRepository.merge(foundCollection, body)
-    return this.collectionRepository.save(foundCollection);
+    return this.collectionRepository.save(foundCollection)
   }
 
   async deleteCollection(id: number) {
