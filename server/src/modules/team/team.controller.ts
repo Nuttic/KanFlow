@@ -9,17 +9,17 @@ export class TeamController {
     constructor(private readonly teamService: TeamService) {}
 
     @Post()
-   async create(@Body() dto: CreateTeamDto) { return this.teamService.create(dto); }
+    async create(@Body() dto: CreateTeamDto) { return this.teamService.create(dto) }
 
     @Get()
-    async findAll() { return this.teamService.findAll(); }
+    async findAll() { return this.teamService.findAll() }
 
     @Get(':id')
-    async findOne(@Param('id', ParseIntPipe) id: number) { return this.teamService.findOne(id); }
+    async findOne(@Param('id', ParseIntPipe) id: number) { return this.teamService.findOne(id) }
 
     @Patch(':id')
-    async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateTeamDto) { return this.teamService.update(id, dto); }
+    async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateTeamDto) { return this.teamService.update(id, dto) }
 
     @Delete(':id')
-    async remove(@Param('id', ParseIntPipe) id: number) { return this.teamService.remove(id); }
+    async remove(@Param('id', ParseIntPipe) id: number) { return this.teamService.remove(id) }
 }

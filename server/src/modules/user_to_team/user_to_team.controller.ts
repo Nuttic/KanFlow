@@ -9,26 +9,26 @@ export class AccessController {
 
     @Post()
     async create(@Body() dto: CreateAccessDto) {
-        return this.accessService.create(dto);
+        return this.accessService.create(dto)
     }
 
     @Get()
     async findAll() {
-        return this.accessService.findAll();
+        return this.accessService.findAll()
     }
 
     @Get(':id')
     async findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.accessService.findOne(id);
+        return this.accessService.findOne(id)
     }
 
     @Patch(':id')
     async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateAccessDto) {
-        return this.accessService.update(id, dto);
+        return this.accessService.update(id, dto)
     }
 
     @Delete(':id')
     async remove(@Param('id', ParseIntPipe) id: number) {
-        return this.accessService.remove(id);
+        return this.accessService.remove(id)
     }
 }

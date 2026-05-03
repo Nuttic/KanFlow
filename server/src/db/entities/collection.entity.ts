@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne} from "typeorm";
 import { User } from "./user.entity";
 import { Team } from "./team.entity";
+import { Collection_access } from "./collection_access.entity";
 
 
 export enum Type{
@@ -44,7 +45,8 @@ export class Collection{
         public team_ : Team | null
     @ManyToOne(() => User, user => user.id, {nullable:true })
         public user_ : User | null
-
+    @OneToMany(() => Collection_access, (access) => access.collection_)
+    accesses: Collection_access[];
     @CreateDateColumn()
         createdAt: Date;
     @UpdateDateColumn()

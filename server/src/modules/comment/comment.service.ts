@@ -18,7 +18,7 @@ export class CommentService {
       creator_: {id: body.creator_},
       task_: {id: body.task_}
     })
-    return this.commentRepository.save(newComment);
+    return this.commentRepository.save(newComment)
   }
 
   // findAll() {
@@ -36,7 +36,7 @@ export class CommentService {
       throw new NotFoundException('такого коммента нема, попробуй снова')
     }
     this.commentRepository.merge(foundComment, body)
-    return this.commentRepository.save(foundComment);
+    return this.commentRepository.save(foundComment)
   }
 
   async deleteComment(id: number) {

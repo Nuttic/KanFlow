@@ -19,11 +19,11 @@ export class AccessService {
             team_: { id: dto.teamId },
             access: dto.access,
         });
-        return await this.accessRepo.save(newAccess);
+        return await this.accessRepo.save(newAccess)
     }
 
     async findAll() {
-        return await this.accessRepo.find({ relations: ['user_', 'team_'] });
+        return await this.accessRepo.find({ relations: ['user_', 'team_'] })
     }
 
     async findOne(id: number) {
@@ -31,8 +31,8 @@ export class AccessService {
             where: { id },
             relations: ['user_', 'team_'],
         });
-        if (!access) throw new NotFoundException(`Запись доступа с ID ${id} не найдена`);
-        return access;
+        if (!access) throw new NotFoundException(`Запись доступа с ID ${id} не найдена`)
+        return access
     }
 
 async update(id: number, dto: UpdateAccessDto) {
@@ -41,11 +41,11 @@ async update(id: number, dto: UpdateAccessDto) {
         throw new NotFoundException(`Запись доступа с ID ${id} не найдена`);
     }
     this.accessRepo.merge(accessRecord, dto);
-    return await this.accessRepo.save(accessRecord);
+    return await this.accessRepo.save(accessRecord)
 }
 
     async remove(id: number) {
-    const accessRecord = await this.findOne(id);
-    return await this.accessRepo.remove(accessRecord);
+    const accessRecord = await this.findOne(id)
+    return await this.accessRepo.remove(accessRecord)
     }
 }

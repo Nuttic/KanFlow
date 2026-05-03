@@ -9,12 +9,12 @@ export class CreateCollectionDTO {
   title: string;
 
   @IsString()
-  description: string; // Исправлена опечатка
+  description: string;
 
   @IsEnum(Color)
   color: Color
 
-  @IsOptional() // Позволяет полю быть null или отсутствовать
+  @IsOptional()
   @IsNumber()
   team_?: number | null;
 
