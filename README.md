@@ -112,8 +112,7 @@
 Запустите PostgreSQL.
 
 Создайте файл .env в папке server
-Bash
-
+```Bash
 # Файл .env
 PORT = 3000
 JWT_SECRET = 'KANFLOW_SECRET'
