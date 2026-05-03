@@ -87,20 +87,17 @@
 * `PATCH /api/comment/{id}` — Обновление комментария
 * `DELETE /api/comment/{id}` — Удаление комментария
 
-### Access Management (ABAC - Права доступа)
+### Access Management
 **К командам:**
 * `POST /api/access_team` — Создание прав доступа
-* `GET /api/access_team/{user_id}` — Поиск прав конкретного пользователя
-* `GET /api/access_team/team/{team_id}`— Поиск всех прав в рамках команды
+* `GET /api/access_team/` — Поиск прав конкретного пользователя
+* `GET /api/access_team/{id}`— Поиск всех прав в рамках команды
 * `PATCH /api/access_team/{id}` — Обновление прав
 * `DELETE /api/access_team/{id}` — Удаление прав
 
 **К доскам (коллекциям):**
 * `POST /api/access_collection` — Создание прав доступа
-* `GET /api/access_collection/{user_id}` — Поиск прав пользователя
-* `GET /api/access_collection/collection/{collection_id}`— Поиск всех прав по доске
-* `PATCH /api/access_collection/{id}` — Обновление прав
-* `DELETE /api/access_collection/{id}` — Удаление прав
+* `GET /api/collection-access/{collection_id}/{user_id}` - ищем права человека в определенной доске
 
 ---
 
@@ -113,6 +110,15 @@
 
 ### 1. Запуск проекта fronted/backend
 Запустите PostgreSQL.
+
+Создайте файл .env в папке server
+Bash
+
+# Файл .env
+PORT = 3000
+JWT_SECRET = 'KANFLOW_SECRET'
+
+В терминале:
 
 ```bash
 cd backend
