@@ -117,16 +117,19 @@
 # Файл .env
 PORT = 3000
 JWT_SECRET = 'KANFLOW_SECRET'
+```
 
 В терминале:
+```bash
 cd backend
 # Установка зависимостей для Backend
 npm i
 # Запуск сервера в режиме разработки
-npm run start:dev
+nest start --watch
 
 cd frontend
 # Установка зависимостей для Frontend
 npm i
 #Запуск Frontend
 npm run dev
+```
